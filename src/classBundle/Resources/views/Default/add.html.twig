@@ -1,0 +1,31 @@
+{% extends 'baseback.html.twig' %}
+{% block content %}
+<html>
+<head>
+    <title>
+add class
+    </title>
+</head>
+<body>
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <section class="ftco-section ftco-no-pt ftco-no-pb contact-section">
+                <div class="container">
+                    <div class="row d-flex align-items-stretch no-gutters">
+                        <h1>Insert class</h1>
+<fieldset style="width: 30%">
+    {{ form_start(form) }}
+ <br>  <h1> Name:</h1> {{ form_widget(form.nom) }}</br>
+  <br>  <h1>Number of Pupils:</h1> {{ form_widget(form.nbPupils) }}</br>
+
+
+    {{ form_widget(form.Insert) }}
+    {{ form_end(form) }}
+
+</fieldset></div> </div> </section></div> </section> </section>
+</body>
+</html>
+{% endblock %}
+
+

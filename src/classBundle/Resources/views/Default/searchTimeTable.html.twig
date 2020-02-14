@@ -1,0 +1,47 @@
+{% extends 'baseback.html.twig' %}
+{% block content %}
+<html>
+<head>
+    <title>class</title></head>
+<body>
+
+<section id="main-content">
+    <section class="wrapper">
+        <div class="row">
+            <section class="ftco-section ftco-no-pt ftco-no-pb contact-section">
+                <div class="container">
+                    <div class="row d-flex align-items-stretch no-gutters">
+                        <h1> Search Time Table</h1>
+
+
+                            {{ form_start(form) }}
+                            {{ form_widget(form.classe) }}</br>
+                            {{ form_end(form) }}
+                            <table border="1">
+                                <tr>
+                                    <th>Time Table</th>
+                                    <th>Classes</th>
+
+                                </tr>
+                                {% for p in timetable %}
+                                    <tr>
+                                        <td><a  href="{{ p.content }}">Time Table</a></td>
+                                        <td>{{ p.classe.nom }}</td>
+                                        <td><a  href="{{ path('class_deleteTimeTable',{"id":p.id}) }}">Delete</a></td>
+                                        <td><a  href="{{ path('class_updateTimeTable',{"id":p.id}) }}">Update</a></td>
+
+                                    </tr>
+
+                                {% endfor %}
+                            </table>
+
+
+
+
+
+
+                    </div> </div> </section></div> </section> </section>
+</body>
+
+</html>
+{% endblock %}

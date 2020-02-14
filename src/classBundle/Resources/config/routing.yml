@@ -1,0 +1,34 @@
+class_homepage:
+    path:     /
+    defaults: { _controller: classBundle:Default:index }
+class_add:
+    path:     /add
+    defaults: { _controller: classBundle:classe:add }
+class_read:
+    path:     /read
+    defaults: { _controller: classBundle:classe:read }
+class_delete:
+    path:     /delete/{id}
+    defaults: { _controller: classBundle:classe:delete }
+class_update:
+    path:     /update/{id}
+    defaults: { _controller: classBundle:classe:update }
+class_addTimeTable:
+    path:     /addTimeTable
+    defaults: { _controller: classBundle:classe:addTimeTable }
+class_readTimeTable:
+    path:     /readTimeTable
+    defaults: { _controller: classBundle:classe:readTimeTable }
+class_deleteTimeTable:
+    path:     /deleteTimeTable/{id}
+    defaults: { _controller: classBundle:classe:deleteTimeTable }
+class_updateTimeTable:
+    path:     /updateTimeTable/{id}
+    defaults: { _controller: classBundle:classe:updateTimeTable }
+class_searchTimeTable:
+    path:     /searchTimeTable
+    defaults: { _controller: classBundle:classe:searchTimeTable }
+
+
+
+
