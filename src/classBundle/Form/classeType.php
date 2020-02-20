@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class classeType extends AbstractType
 {
@@ -17,7 +18,8 @@ class classeType extends AbstractType
         $builder->add('nom')
             ->add('nbPupils')
             ->add('Insert',SubmitType::class,[
-                'attr' => ['formnovalidate ' => 'formnovalidate']
+                'attr' => ['formnovalidate ' => 'formnovalidate'
+                ]
             ]);
     }/**
      * {@inheritdoc}

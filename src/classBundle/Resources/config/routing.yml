@@ -1,6 +1,6 @@
 class_homepage:
     path:     /
-    defaults: { _controller: classBundle:Default:index }
+    defaults: { _controller: classBundle:Default:home }
 class_add:
     path:     /add
     defaults: { _controller: classBundle:classe:add }
@@ -28,6 +28,21 @@ class_updateTimeTable:
 class_searchTimeTable:
     path:     /searchTimeTable
     defaults: { _controller: classBundle:classe:searchTimeTable }
+class_home:
+    path:     /home
+    defaults: { _controller: classBundle:Default:home }
+class_pdf:
+    path:     /pdfM
+    defaults: { _controller: classBundle:classe:indexm }
+class_createTtable:
+    path:     /createTtable
+    defaults: { _controller: classBundle:classe:createTtable }
+class_Ttime:
+    path:     /readT
+    defaults: { _controller: classBundle:classe:readTime }
+class_searchTtime:
+    path:     /searchT
+    defaults: { _controller: classBundle:classe:searchTtime }
 
 
 

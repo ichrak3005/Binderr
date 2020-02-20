@@ -3,6 +3,7 @@
 namespace classBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * timetable
@@ -23,6 +24,10 @@ class timetable
 
     /**
      * @var string
+     * @Assert\File(
+     *   maxSize = "1024k",
+     *   mimeTypes = {"application/pdf", "application/x-pdf"},
+     *   mimeTypesMessage = "Please upload a valid PDF")
      *
      * @ORM\Column(name="content", type="string", length=255)
      */
@@ -33,6 +38,7 @@ class timetable
      * @ORM\JoinColumn(name="classe",referencedColumnName="id")
      */
     private $classe;
+
 
     /**
      * @return mixed

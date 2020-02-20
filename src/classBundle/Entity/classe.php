@@ -3,6 +3,8 @@
 namespace classBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * classe
@@ -23,15 +25,23 @@ class classe
 
     /**
      * @var string
-     *
+     * @Assert\NotBlank
+     * @Assert\Length(min=1, max=10)
      * @ORM\Column(name="nom", type="string", length=255)
      */
     private $nom;
 
     /**
      * @var int
-     *
+     * @Assert\Length(min=1, max=2)
+     * @Assert\NotBlank
+     *@Assert\Range(
+     *min=1,
+     * max=40,
+     *  minMessage="Negative species!",
+     * maxMessage="max 40 pupils")
      * @ORM\Column(name="nbPupils", type="integer")
+
      */
     private $nbPupils;
     /**

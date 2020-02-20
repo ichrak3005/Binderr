@@ -4,15 +4,9 @@
 <head>
     <title>class</title></head>
 <body>
+<center>
 
-<section id="main-content">
-    <section class="wrapper">
-        <div class="row">
-            <section class="ftco-section ftco-no-pt ftco-no-pb contact-section">
-                <div class="container">
-                    <div class="row d-flex align-items-stretch no-gutters">
-                        <h1> Search Time Table</h1>
-
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
                             {{ form_start(form) }}
                             {{ form_widget(form.classe) }}</br>
@@ -21,11 +15,14 @@
                                 <tr>
                                     <th>Time Table</th>
                                     <th>Classes</th>
+                                    <th>Delete</th>
+                                    <th>Update</th>
 
                                 </tr>
                                 {% for p in timetable %}
                                     <tr>
-                                        <td><a  href="{{ p.content }}">Time Table</a></td>
+                                      <td>  <a href="{{ asset('uploads/brochures/' ~ p.content) }}">View brochure (PDF)</a></td>
+
                                         <td>{{ p.classe.nom }}</td>
                                         <td><a  href="{{ path('class_deleteTimeTable',{"id":p.id}) }}">Delete</a></td>
                                         <td><a  href="{{ path('class_updateTimeTable',{"id":p.id}) }}">Update</a></td>
@@ -40,7 +37,8 @@
 
 
 
-                    </div> </div> </section></div> </section> </section>
+
+</center>
 </body>
 
 </html>

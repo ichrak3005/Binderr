@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class updateTimeTableType extends AbstractType
 {
@@ -22,10 +23,23 @@ class updateTimeTableType extends AbstractType
                 'class'=>'classBundle:classe',
                 'choice_label'=>'nom',
                 'multiple'=>false,
+
                 'expanded' => false,))
-            ->add('content',\Symfony\Component\Form\Extension\Core\Type\TextType::class
-            )
-            ->add('enregistrer',SubmitType::class,[
+            /*->add('content',\Symfony\Component\Form\Extension\Core\Type\TextType::class
+            )*/
+            ->add('content',FileType::class,array('label'=>'content',
+                'data_class' => null,
+
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'application/x-pdf',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid PDF document',
+                    ])]))
+            ->add('update',SubmitType::class,[
                 'attr' => ['formnovalidate ' => 'formnovalidate']
             ]);
     }/**

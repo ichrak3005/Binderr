@@ -1,16 +1,26 @@
 {% extends 'baseback.html.twig' %}
 {% block content %}
-<section id="main-content">
-    <section class="wrapper">
-        <div class="row">
-            <section class="ftco-section ftco-no-pt ftco-no-pb contact-section">
-                <div class="container">
-                    <div class="row d-flex align-items-stretch no-gutters">
-                        <h3>Update Time Table</h3>
-                        <fieldset style="width: 30%">
-{{ form (form) }}
-                        </fieldset></div> </div> </section></div> </section> </section>
 
+    <center>
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+        <br>
+        <br>
+        <br>
+        <fieldset style="width: 90%">
+            <h1>Update Time Table</h1>
+<br>
+            {{ form_start(form) }}
+            <div class="input-group input-group-sm mb-3">  <h2> Time Table </h2>{{ form_widget(form.content) }}</div>
+
+            <div class="input-group input-group-sm mb-3">
+                <h2> Class</h2>
+
+                {{ form_widget(form.classe) }}</br></div>
+            {{ form_widget(form.update) }}
+            {{ form_end(form) }}
+        </fieldset>
+    </center>
 {% endblock  %}
 
 

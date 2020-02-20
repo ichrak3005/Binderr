@@ -405,6 +405,7 @@ ul.sidebar-menu li a.active i {
 .header, .footer {
     min-height: 60px;
     padding: 0 15px;
+    color: #00a6b2;
 }
 
 .header {
@@ -414,10 +415,11 @@ ul.sidebar-menu li a.active i {
     z-index: 1002;
 }
 
-.black-bg {
-    background: #22242a;
-    border-bottom: 1px solid #393d46;
+.blue-bg {
+    background: #6dc8c4;
+    border-bottom: 1px solid #6dc8c4;
 }
+
 
 .wrapper {
     display: inline-block;
@@ -470,7 +472,7 @@ a.logo span {
 }
 
 ul.top-menu > li > a {
-    color: #666666;
+    color: #6dc8c4;
     font-size: 16px;
     border-radius: 4px;
     -webkit-border-radius: 4px;
@@ -697,7 +699,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .log-arrow-up {
-    background: url("../img/arrow-up.png") no-repeat;
+    background: url("img/arrow-up.png") no-repeat;
     width: 20px;
     height: 11px;
     position: absolute;

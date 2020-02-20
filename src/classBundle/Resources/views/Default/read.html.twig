@@ -6,40 +6,39 @@
     <title>class</title></head>
 <body>
 
+<center>
 
-
-<section id="main-content">
-    <section class="wrapper">
-        <div class="row">
-            <section class="ftco-section ftco-no-pt ftco-no-pb contact-section">
-                <div class="container">
-                    <div class="row d-flex align-items-stretch no-gutters">
-                        <h1>List of pupils</h1>
-                        <table border="1">
+<fieldset style="width: 30%">
+<br>
+    <br>
+                       <h1><h1> <strong>List of pupils</strong></h1></h1>
+    <br>
+                        <table border="1" width="70%">
                             <tr>
-                                <th>Classes Name</th>
-                                <th>Number of Pupils</th>
+                                <th>Classes</th>
+                                <th>Pupils</th>
+                                <th>Delete</th>
+                                <th>Update</th>
 
                             </tr>
                         {% for classe in classe  %}
-<tr>
+<tr >
 
-                           <td>{{ classe.nom }}</td>
+                           <td>{{ classe.nom }}        </td>
 
-                                <td>{{ classe.nbPupils }}</td>
+                                <td>{{ classe.nbPupils }}         </td>
 
 
-                                <td><a  href="{{ path('class_delete',{"id":classe.id}) }}">Delete</a></td>
-                                <td><a  href="{{ path('class_update',{"id":classe.id}) }}">Update</a></td>
+                                <td class="col-md-2"><a  href="{{ path('class_delete',{"id":classe.id}) }}">Delete</a></td>
+                                <td class="col-md-2"><a  href="{{ path('class_update',{"id":classe.id}) }}">Update</a></td>
 
 
                         {% endfor %}
 
 </tr>
                         </table>
-                    </div> </div> </section></div> </section> </section>
-
-
+</fieldset>
+</center>
 </body>
 
 </html>

@@ -2,15 +2,25 @@
 
 namespace classBundle\Controller;
 
+use CalendrierMedecinsBundle\Entity\Patient;
+use CalendrierMedecinsBundle\Form\searchType;
 use classBundle\Entity\classe;
 use classBundle\Entity\timetable;
+use classBundle\Entity\Ttable;
+use classBundle\Entity\Ttime;
 use classBundle\Form\addTimeTableType;
 use classBundle\Form\classeType;
+use classBundle\Form\createTimeTableType;
+use classBundle\Form\readTtimeType;
 use classBundle\Form\searchTimeTableType;
+use classBundle\Form\searchTtime;
 use classBundle\Form\updateTimeTableType;
 use classBundle\Form\updateType;
+use classBundle\Repository\TtimeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class classeController extends Controller
 {
@@ -74,7 +84,7 @@ class classeController extends Controller
 
     }
 
-
+/*
 
     public function addTimeTableAction(Request $request)
     {
@@ -102,6 +112,63 @@ class classeController extends Controller
 
             // this condition is needed because the 'brochure' field is not required
             // so the PDF file must be processed only when a file is uploaded
+
+
+    }*/
+    public function addTimeTableAction(Request $request)
+    {
+        $timeTable=new timetable();
+        $form=$this->createForm(addTimeTableType::class,$timeTable);
+        $form=$form->handleRequest($request);
+
+
+        if($form->isValid()&& $form->isSubmitted()){
+            /**
+             * @var UploadedFile $file
+             */
+            $file=$timeTable->getContent();
+            $fileName= uniqid().'.'.$file->getExtension();
+            $file->move($this->getParameter('brochures_directory'),$fileName);
+            $timeTable->setContent($fileName);
+            $em=$this->getDoctrine()->getManager();
+            $em->persist($timeTable);
+
+            $em->flush();
+            return $this->redirectToRoute('class_addTimeTable');
+        }
+        return $this->render('@class/Default/addTimeTable.html.twig', array(
+            'form'=>$form->createView()
+        ));
+
+
+
+        // this condition is needed because the 'brochure' field is not required
+        // so the PDF file must be processed only when a file is uploaded
+
+
+    }
+    public function createTtableAction(Request $request)
+    {
+        //create an object to store our data after the form submission
+        $table=new Ttime();
+        //prepare the form with the function: createForm()
+        $form=$this->createForm(createTimeTableType::class,$table);
+        //extract the form answer from the received request
+        $form=$form->handleRequest($request);
+        //if this form is valid
+        if($form->isValid()){
+            //create an entity manager object
+            $em=$this->getDoctrine()->getManager();
+            //persist the object $club in the ORM
+            $em->persist($table);
+            //update the data base with flush
+            $em->flush();
+            //redirect the route after the add
+            return $this->redirectToRoute('class_createTtable');
+        }
+        return $this->render('@class/Default/createTimeTable.html.twig', array(
+            'form'=>$form->createView()
+        ));
 
 
     }
@@ -132,6 +199,10 @@ class classeController extends Controller
         $form= $this->createForm(updateTimeTableType::class,$class);
         $form->handleRequest($request);
         if ($form->isSubmitted()){
+            $file=$class->getContent();
+            $fileName= uniqid().'.'.$file->getExtension();
+            $file->move($this->getParameter('brochures_directory'),$fileName);
+            $class->setContent($fileName);
             $ef= $this->getDoctrine()->getManager();
             $ef->persist($class);
             $ef->flush();
@@ -150,17 +221,77 @@ class classeController extends Controller
         if($form->isSubmitted()){
             $timeTable = $this->getDoctrine()->getManager()->getRepository(timetable::class)
                 ->findBy(array('classe'=>$timeTable->getClasse()));
+
         }
         else{
             $timeTable = $this->getDoctrine()->getManager()->getRepository(timetable::class)->findAll();
         }
 
-
         $list = $this->getDoctrine()->getManager()->getRepository(timetable::class)->findAll();
-
 
         return $this->render("@class/Default/searchTimeTable.html.twig",array("form"=>$form->createView(),'timetable'=>$timeTable,'list'=>$list));
 
+
+    }
+
+    public function searchTtimeAction(Request $request)
+    {
+        $time = new Ttime();//instance d'entity
+        $form= $this->createForm(searchTtime::class,$time);
+        $form->handleRequest($request);
+        if($form->isSubmitted()){
+            $time = $this->getDoctrine()->getManager()->getRepository(Ttime::class)
+                ->findBy(array('subject'=>$time->getSubject(),'day'=>$time->getDay(),'time'=>$time->getTime(),'classe'=>$time->getClasse()));
+        }
+        else{
+            $time = $this->getDoctrine()->getManager()->getRepository(Ttime::class)->findAll();
+        }
+        return $this->render("@class/Default/searchTtime.html.twig",array("form"=>$form->createView(),'time'=>$time));
+
+    }
+
+
+
+
+
+
+
+
+    public function indexmAction(Request $request)
+    {
+        $time = new Ttime();
+        $form = $this->createForm(readTtimeType::class, $time);
+        $form->handleRequest($request);
+        $timeTable = $this->getDoctrine()->getManager()->getRepository(Ttime::class)->findBy(array(),array('day'=>'ASC'));
+        // replace this example code with whatever you need
+
+        $snappy = $this->get('knp_snappy.pdf');
+
+        $html = $this->renderView('@class/Default/index.html.twig', array("form"=>$form->createView(),'time'=>$timeTable )
+        );
+
+        $filename = 'time-table';
+
+        return new Response(
+            $snappy->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => 'inline; filename="'.$filename.'.pdf"'
+            )
+        );
+    }
+
+
+    public function readTimeAction(Request $request)
+    {
+
+        $time = new Ttime();
+        $form = $this->createForm(readTtimeType::class, $time);
+        $form->handleRequest($request);
+        $timeTable = $this->getDoctrine()->getManager()->getRepository(Ttime::class)->findBy(array(),array('day'=>'ASC'));
+
+      return $this->render('@class/Default/readTtime.html.twig', array("form"=>$form->createView(),'time'=>$timeTable ));
 
     }
 }

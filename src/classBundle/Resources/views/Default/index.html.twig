@@ -1,1 +1,46 @@
-{% extends 'base.html.twig' %}
+<
+<html>
+<head>
+    <title>class</title></head>
+<body>
+<center>
+    <fieldset style="width: 90%">
+        <br>
+        <br>
+        <br>
+        <br><br>
+
+
+
+
+        <table border="1" width="70%">
+            <tr>
+
+                <th>day</th>
+                <th>subject</th>
+                <th>time</th>
+                <th>class name</th>
+
+            </tr>
+            {% for time in time  %}
+            <tr >
+
+                <td>{{ time.day }}        </td>
+
+                <td>{{ time.subject }}         </td>
+                <td>{{ time.time }}        </td>
+                <td>{{ time.classe.nom }}        </td>
+
+
+
+
+                {% endfor %}
+
+            </tr>
+        </table>
+    </fieldset>
+</center>
+</body>
+
+</html>
+

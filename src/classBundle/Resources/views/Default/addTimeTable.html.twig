@@ -7,24 +7,28 @@
     </title>
 </head>
 <body>
+<br>
+<br>
+<br>
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 
-<h1>Add un TimeTable</h1>
 
-
-<section id="main-content">
-    <section class="wrapper">
-        <div class="row">
-            <section class="ftco-section ftco-no-pt ftco-no-pb contact-section">
-                <div class="container">
-                    <div class="row d-flex align-items-stretch no-gutters">
                         <h1>Insert Time Table</h1>
-                        <fieldset style="width: 30%">
+<br>
+<br>
+<br>
+                        <fieldset style="width: 90%">
+
                             {{ form_start(form) }}
-                            <h1> Time Table:</h1>{{ form_widget(form.content) }}</br>
+                            <div class="input-group input-group-sm mb-3">
+                                <h1> Time Table:</h1>{{ form_widget(form.content) }}</br></div>
+                            <div class="input-group input-group-sm mb-3">
                             <h1> Class:</h1> {{ form_widget(form.classe) }}</br>
+                            </div>
                             {{ form_widget(form.Insert) }}
                             {{ form_end(form) }}
-                        </fieldset></div> </div> </section></div> </section> </section>
+                        </fieldset>
+
 </body>
 </html>
 {% endblock %}
